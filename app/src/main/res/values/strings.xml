@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">C-Observer</string>
     <string name="action_settings">Settings</string>
+
+    <string name="ion_search"></string>
+
+    <string name="search_hint">Enter coin name</string>
+    <string name="search_coin_activity_name">Coins</string>
 </resources>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/coin_profile_img_view"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/coin_name_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/coin_profile_img_view"
+        android:fontFamily="sans-serif"
+        android:text="Ripple"
+        android:textColor="@color/itemColorView"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coin_symbol_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coin_name_item_view"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/coin_profile_img_view"
+        android:fontFamily="sans-serif"
+        android:text="XRP"
+        android:textColor="@color/itemColorView"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/symbol_usd_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/coin_price_usd_item_view"
+        android:fontFamily="sans-serif"
+        android:text="$"
+        android:textColor="@color/itemColorView"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coin_price_usd_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="sans-serif"
+        android:text="NaN"
+        android:textColor="@color/itemColorView"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/coin_percent_change_24h_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/coin_price_usd_item_view"
+        android:fontFamily="sans-serif"
+        android:text="NaN"
+        android:textColor="@color/itemColorView"
+        android:textSize="15sp" />
+</RelativeLayout>

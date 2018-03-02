@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/Toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/wallet_image_view"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/wallet_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/wallet_image_view"
+            android:fontFamily="sans-serif"
+            android:text="Ripple"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/wallet_symbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toRightOf="@+id/wallet_name"
+            android:fontFamily="sans-serif"
+            android:text="XRP"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/trade_price_usd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wallet_name"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/wallet_image_view"
+            android:fontFamily="sans-serif"
+            android:text="0.0"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/symbol_usd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wallet_name"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/trade_price_usd"
+            android:fontFamily="sans-serif"
+            android:text="USD"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/trade_price_btc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trade_price_usd"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/wallet_image_view"
+            android:fontFamily="sans-serif"
+            android:text="0.0000"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/symbol_btc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/symbol_usd"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@+id/trade_price_btc"
+            android:fontFamily="sans-serif"
+            android:text="BTC"
+            android:textSize="13sp" />
+
+        <View
+            android:id="@+id/delimiter_view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/wallet_image_view"
+            android:layout_marginTop="4dp"
+            android:background="@color/gray_mercury" />
+
+        <LinearLayout
+            android:id="@+id/wallet_general_market_cap_block_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/delimiter_view"
+            android:layout_marginTop="4dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/market_cap_rank_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="RANK"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/market_cap_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="MARKET CAP"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/percent_change_24h_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="CHANGE 24H"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wallet_general_market_cap_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/wallet_general_market_cap_block_title"
+            android:layout_marginTop="8dp"
+            android:weightSum="3">
+
+            <TextView
+                android:id="@+id/market_cap_rank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+
+            <TextView
+                android:id="@+id/market_cap"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="0 USD"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/percent_change_24h"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="0 %"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/delimiter_view_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/wallet_general_market_cap_block"
+            android:layout_marginTop="4dp"
+            android:background="@color/gray_mercury" />
+
+        <TextView
+            android:id="@+id/your_wallet_setting_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/delimiter_view_bottom"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Your wallet settings"
+            android:textColor="@color/colorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/trade_date_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/your_wallet_setting_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="TRADE DATE"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/trade_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/your_wallet_setting_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="0"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/trade_price_coin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trade_date_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="TRADE PRICE"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/trade_price_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/trade_date"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="$ 0"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/enter_quantity_coin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/trade_price_coin_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="ENTER QUANTITY"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/enter_quantity_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/trade_price_coin"
+            android:layout_marginTop="4dp"
+            android:background="@null"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:hint="Enter Quantity"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/total_value_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/enter_quantity_coin_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="TOTAL VALUE"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/total_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/enter_quantity_coin"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="$ 0"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/add_alert_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/total_value_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="Add alert"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/above_coin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/add_alert_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="ABOVE"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/enter_above_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/add_alert_title"
+            android:layout_marginTop="4dp"
+            android:background="@null"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:hint="Enter Above"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/current_coin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/above_coin_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:text="CURRENT"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/current_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/enter_above_coin"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="$ 0"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/below_coin_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/current_coin_title"
+            android:layout_marginTop="4dp"
+            android:fontFamily="sans-serif"
+            android:text="BELOW"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/enter_below_coin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/current_coin"
+            android:layout_marginTop="4dp"
+            android:background="@null"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:hint="Enter Below"
+            android:inputType="numberDecimal"
+            android:singleLine="true"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+</LinearLayout>
