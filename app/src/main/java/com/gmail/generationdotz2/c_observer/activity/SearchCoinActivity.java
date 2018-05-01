@@ -4,6 +4,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -31,20 +32,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchCoinActivity extends AppCompatActivity {
+public class SearchCoinActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView coinRecyclerView;
     private CoinAdapter coinAdapter;
     private List<Cryptocurrency> coinList;
     // Toolbar
     private Toolbar toolbar;
     private SearchView searchView;
+    // SwipeRefreshLayout
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_coin);
+
         initRecyclerView();
-        load();
+
         // Для поддержки версий ниже Android 5.0 (API 21).
         toolbar = findViewById(R.id.toolbar);
         // Кнопка "Назад" в тулбаре.
@@ -103,6 +107,10 @@ public class SearchCoinActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         coinRecyclerView = findViewById(R.id.coin_recycler_view);
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         coinRecyclerView.setLayoutManager(layoutManager);   // Отвечает за форму отображения элементо.
         coinRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -119,12 +127,19 @@ public class SearchCoinActivity extends AppCompatActivity {
         coinList = new ArrayList<>();
         coinAdapter = new CoinAdapter(this, coinList, onCoinClickListener);
         coinRecyclerView.setAdapter(coinAdapter);
+
+        // show loader and fetch coins
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                load();
+            }
+        });
     }
 
 
     private void load() {
-//        Collection<Cryptocurrency> coins = getCoinMock();
-//        coinAdapter.setItems(coins);
+        swipeRefreshLayout.setRefreshing(true);
         CoinMarketCapService coinMarketCapService = Retro2Client.getCoinMarketCapService();
         Call<Collection<Cryptocurrency>> cryptocurrencys = coinMarketCapService.getCryptocurrency();
         cryptocurrencys.enqueue(new Callback<Collection<Cryptocurrency>>() {
@@ -134,71 +149,22 @@ public class SearchCoinActivity extends AppCompatActivity {
                 // adding contacts to contacts list
                 coinAdapter.clearItems();
                 coinAdapter.setItems(coins);
-
                 // refreshing recycler view
                 coinAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<Collection<Cryptocurrency>> call, Throwable t) {
                 Toast.makeText(SearchCoinActivity.this, "error :(", Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private Collection<Cryptocurrency> getCoinMock() {
-        return Arrays.asList(
-                new Cryptocurrency(
-                        "bitcoin",
-                        "Bitcoin",
-                        "BTC",
-                        "1",
-                        "10234.3",
-                        "1.0",
-                        "8490130000.0",
-                        "172771993407",
-                        "16881662.0",
-                        "16881662.0",
-                        "21000000.0",
-                        "1.13",
-                        "-2.02",
-                        "2.28",
-                        "1519381768"
-                ),
-                new Cryptocurrency(
-                        "ethereum",
-                        "Ethereum",
-                        "ETH",
-                        "2",
-                        "863.092",
-                        "0.0856871",
-                        "2420140000.0",
-                        "84403053792.0",
-                        "97791491.0",
-                        "97791491.0",
-                        null,
-                        "0.57",
-                        "3.21",
-                        "-7.29",
-                        "1519381752"
-                ),
-                new Cryptocurrency(
-                        "ripple",
-                        "Ripple",
-                        "XRP",
-                        "3",
-                        "0.99849",
-                        "0.00009913",
-                        "1097030000.0",
-                        "39035769041.0",
-                        "39094802192.0",
-                        "99992622540.0",
-                        "100000000000",
-                        "0.42",
-                        "1.34",
-                        "-11.44",
-                        "1519381741"
-                )
-        );
+    @Override
+    public void onRefresh() {
+        // swipe refresh is performed, fetch the coins again
+        load();
     }
 }

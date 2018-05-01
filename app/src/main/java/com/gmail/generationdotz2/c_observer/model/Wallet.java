@@ -1,14 +1,26 @@
 package com.gmail.generationdotz2.c_observer.model;
 
-public class Wallet {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Wallet implements Parcelable {
     private Cryptocurrency coin;
     private Alert alert;
     private float totalValue = 0.0f;
+
+    public Wallet() {
+    }
 
     public Wallet(Cryptocurrency coin, Alert alert, float totalValue) {
         this.coin = coin;
         this.alert = alert;
         this.totalValue = totalValue;
+    }
+
+    protected Wallet(Parcel in) {
+        coin = in.readParcelable(Cryptocurrency.class.getClassLoader());
+        alert = in.readParcelable(Alert.class.getClassLoader());
+        totalValue = in.readFloat();
     }
 
     public Cryptocurrency getCoin() {
@@ -53,5 +65,29 @@ public class Wallet {
         result = 31 * result + alert.hashCode();
         result = 31 * result + (totalValue != +0.0f ? Float.floatToIntBits(totalValue) : 0);
         return result;
+    }
+
+    public static final Creator<Wallet> CREATOR = new Creator<Wallet>() {
+        @Override
+        public Wallet createFromParcel(Parcel in) {
+            return new Wallet(in);
+        }
+
+        @Override
+        public Wallet[] newArray(int size) {
+            return new Wallet[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(coin, flags);
+        dest.writeParcelable(alert, flags);
+        dest.writeFloat(totalValue);
     }
 }

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">C-Observer</string>
     <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="action_delete">Delete</string>
 
     <string name="ion_search"></string>
 

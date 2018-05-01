@@ -23,7 +23,7 @@ import java.util.List;
 // Здесь же указали наш собственный ViewHolder, который предоставит нам доступ к View-компонентам.
 public class CoinAdapter extends RecyclerView.Adapter<CoinAdapter.CoinViewHolder> implements Filterable {
     private OnCoinClickListener onCoinClickListener;    // Наблюдателя за кликом по элементу coin.
-    private List<Cryptocurrency> coinList;      // Список криптовалют.
+    private List<Cryptocurrency> coinList;              // Список криптовалют.
     private List<Cryptocurrency> coinListFiltered;
     private Context context;
 
